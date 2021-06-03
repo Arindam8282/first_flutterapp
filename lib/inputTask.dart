@@ -8,7 +8,7 @@ class InputTask extends StatelessWidget {
       onPressed: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: const Text('AlertDialog Title'),
+          title: const Text('Add Goal'),
           content: Input(),
           actions: <Widget>[
             TextButton(
@@ -17,7 +17,7 @@ class InputTask extends StatelessWidget {
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, 'OK'),
-              child: const Text('OK'),
+              child: const Text('Add'),
             ),
           ],
         ),
@@ -35,14 +35,9 @@ class Input extends StatelessWidget {
         initialValue: '',
         maxLength: 20,
         decoration: InputDecoration(
-          icon: Icon(Icons.favorite),
-          labelText: 'Label text',
+          labelText: 'Enter Your Goal',
           labelStyle: TextStyle(
             color: Color(0xFF6200EE),
-          ),
-          helperText: 'Helper text',
-          suffixIcon: Icon(
-            Icons.check_circle,
           ),
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Color(0xFF6200EE)),

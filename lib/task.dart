@@ -19,19 +19,19 @@ class Task extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: Text(
                 '${goal}',
-                style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                style: TextStyle(color: Colors.blue.withOpacity(0.6)),
               ),
             ),
             ButtonBar(
               alignment: MainAxisAlignment.start,
               children: [
                 FlatButton(
-                  textColor: const Color(0xFF6200EE),
                   onPressed: () {
                     removeTask(goal);
                     // Perform some action
                   },
-                  child: const Text('DELETE'),
+                  child: Text('DELETE',
+                      style: TextStyle(color: Colors.red.withOpacity(0.6))),
                 ),
               ],
             ),
