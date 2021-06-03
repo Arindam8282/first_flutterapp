@@ -1,7 +1,55 @@
 import 'package:flutter/material.dart';
 
+import './task.dart';
+import './inputTask.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(NewApp());
+}
+
+class NewApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return NewAppState();
+  }
+}
+
+class NewAppState extends State<NewApp> {
+  InputTask dialog = new InputTask();
+  var tasks = ['Morning walk', 'Brush Teeth', 'Fill up water', 'Learn Flutter'];
+  void removeTask(String task) {
+    setState(() {
+      tasks.remove(task);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('TodoApp'),
+          backgroundColor: Colors.red,
+        ),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                Text('Add your Goals'),
+                ...(tasks.map)((task) {
+                  return Task(task, removeTask);
+                }).toList()
+              ],
+            ),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        floatingActionButton: InputTask(),
+      ),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -10,6 +58,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -47,7 +96,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  int _selectedIndex = 0;
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -57,6 +106,22 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter = _counter + 3;
     });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      _counter = _counter - 3;
+    });
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    if (index == 0)
+      _incrementCounter();
+    else
+      _decrementCounter();
   }
 
   @override
@@ -71,6 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
+        backgroundColor: Colors.deepPurple[800],
         title: Text(widget.title),
       ),
       body: Center(
@@ -103,11 +169,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add),
+              label: 'Increment',
+              backgroundColor: Colors.red),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.minimize),
+            label: 'Decrement',
+            backgroundColor: Colors.green,
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        backgroundColor: Colors.deepPurple[500],
+        selectedItemColor: Colors.blue[100],
+        onTap: _onItemTapped,
+      ),
     );
   }
 }
