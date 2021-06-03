@@ -16,11 +16,16 @@ class NewApp extends StatefulWidget {
 }
 
 class NewAppState extends State<NewApp> {
-  InputTask dialog = new InputTask();
   var tasks = ['Morning walk', 'Brush Teeth', 'Fill up water', 'Learn Flutter'];
   void removeTask(String task) {
     setState(() {
       tasks.remove(task);
+    });
+  }
+
+  void addTask(String task) {
+    setState(() {
+      tasks.add(task);
     });
   }
 
@@ -46,7 +51,7 @@ class NewAppState extends State<NewApp> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        floatingActionButton: InputTask(),
+        floatingActionButton: InputTask(addTask),
       ),
     );
   }

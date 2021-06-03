@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class InputTask extends StatelessWidget {
+  var addTask;
+  var input = Input();
+  InputTask(this.addTask);
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
@@ -9,14 +12,17 @@ class InputTask extends StatelessWidget {
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: const Text('Add Goal'),
-          content: Input(),
+          content: input,
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.pop(context, 'Cancel'),
               child: const Text('Cancel'),
             ),
             TextButton(
-              onPressed: () => Navigator.pop(context, 'OK'),
+              onPressed: () {
+                addTask(input.myGoal.text);
+                Navigator.pop(context, 'OK');
+              },
               child: const Text('Add'),
             ),
           ],
@@ -27,12 +33,13 @@ class InputTask extends StatelessWidget {
 }
 
 class Input extends StatelessWidget {
+  final myGoal = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
       child: TextFormField(
         cursorColor: Theme.of(context).cursorColor,
-        initialValue: '',
+        controller: myGoal,
         maxLength: 20,
         decoration: InputDecoration(
           labelText: 'Enter Your Goal',
