@@ -1,7 +1,10 @@
-# firstapp
+# TodoList App
 
-A new Flutter project.
-
+A new Flutter app to set your daily goals.
+### Home Screen
+![image](./lib/assets/pic1.png)
+### Add Task
+![image](./lib/assets/pic2.png)
 ## Getting Started
 
 This project is a starting point for a Flutter application.
